@@ -160,9 +160,9 @@ def parse_and_error_handle(data):
 
 @post('/upload/')
 def upload():
-    bottle.response.set_header("Access-Control-Allow-Origin", "*")
-    bottle.response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    bottle.response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     try:
         # Body may or may not be compressed.
         message_body = get_decompressed_message()
@@ -195,9 +195,9 @@ def health_check():
 
 @get('/stats/')
 def stats():
-    bottle.response.set_header("Access-Control-Allow-Origin", "*")
-    bottle.response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    bottle.response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     stats = statsCollector.getSummary()
     stats["version"] = Settings.CEDDN_VERSION
     return simplejson.dumps(stats)

@@ -38,9 +38,9 @@ if Settings.RELAY_DUPLICATE_MAX_MINUTES:
 
 @get('/stats/')
 def stats():
-    bottle.response.set_header("Access-Control-Allow-Origin", "*")
-    bottle.response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    bottle.response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     stats = statsCollector.getSummary()
     stats["version"] = Settings.CEDDN_VERSION
     return simplejson.dumps(stats)
