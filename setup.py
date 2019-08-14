@@ -3,7 +3,7 @@ import re
 import glob
 
 
-VERSIONFILE = "src/eddn/conf/Version.py"
+VERSIONFILE = "src/ceddn/conf/Version.py"
 verstr      = "unknown"
 try:
     verstrline = open(VERSIONFILE, "rt").read()
@@ -17,24 +17,24 @@ except EnvironmentError:
 
 
 setup(
-    name='eddn',
+    name='ceddn',
     version=verstr,
-    description='Elite: Dangerous Data Network',
-    author='Anthor (EDSM)',
-    author_email='contact@edsm.net',
-    url='https://github.com/EDSM-NET/EDDN',
+    description='Canonn Elite Dangerous Data Network',
+    author='Canonn R&D Team',
+    author_email='rd@canonn.tech',
+    url='https://github.com/Canonn-Science/CEDDN',
     packages=find_packages('src', exclude=["*.tests"]),
     package_dir = {'':'src'},
-    data_files=[('eddn/schemas', glob.glob("schemas/*.json"))],
+    data_files=[('ceddn/schemas', glob.glob("schemas/*.json"))],
     long_description="""\
-      The Elite: Dangerous Data Network allows E:D players to share data. Not affiliated with Frontier Developments.
+      The Canonn Elite Dangerous Data Network allows E:D players to share data. Not affiliated with Frontier Developments.
       """,
     install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python"],
     entry_points={
         'console_scripts': [
-            'eddn-gateway = ceddn.Gateway:main',
-            'eddn-relay = ceddn.Relay:main',
-            'eddn-monitor = ceddn.Monitor:main',
+            'ceddn-gateway = ceddn.Gateway:main',
+            'ceddn-relay = ceddn.Relay:main',
+            'ceddn-monitor = ceddn.Monitor:main',
             ],
         }
       )

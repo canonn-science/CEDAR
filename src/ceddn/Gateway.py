@@ -2,7 +2,7 @@
 
 """
 Contains the necessary ZeroMQ socket and a helper function to publish
-market data to the Announcer daemons.
+data to the Announcer daemons.
 """
 import gevent
 import hashlib

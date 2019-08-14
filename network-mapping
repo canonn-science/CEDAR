@@ -1,0 +1,12 @@
+Relay
+http: 0.0.0.0:9090
+Receiver: localhost:8500 (From Gateway)
+Sender: 0.0.0.0:9500
+
+Gateway
+http: localhost:8081
+Sender: localhost:8500 (To Relay, Monitor)
+
+Monitor
+http: 0.0.0.0:9091
+Receiver: localhost:8500 (From Gateway)

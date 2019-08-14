@@ -48,8 +48,8 @@ class _Settings(object):
 
     GATEWAY_JSON_SCHEMAS                    = {
 
-        "https://ceddn.canonn.tech/schemas/journal/1"                    : "schemas/journal-v1.0.json",
-        "https://ceddn.canonn.tech/schemas/journal/1/test"               : "schemas/journal-v1.0.json",
+        "https://ceddn.canonn.tech/schemas/codex/1"         : "schemas/codex-v1.0.json",
+        "https://ceddn.canonn.tech/schemas/codex/1/test"    : "schemas/codex-v1.0.json",
     }
 
     GATEWAY_OUTDATED_SCHEMAS                = []
@@ -63,7 +63,9 @@ class _Settings(object):
 
     MONITOR_RECEIVER_BINDINGS               = ["tcp://127.0.0.1:8500"]
 
-    MONITOR_DB                              = {
+    MONITOR_DB = {
+        "host":     os.getenv("MONITOR_DB_HOST"),
+        "post":     os.getenv("MONITOR_DB_PORT"),
         "user":     os.getenv("MONITOR_DB_USER"),
         "password": os.getenv("MONITOR_DB_PASS"),
         "database": os.getenv("MONITOR_DB_NAME")

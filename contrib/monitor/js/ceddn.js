@@ -277,86 +277,6 @@ var doUpdateSoftwares = function()
     });
 }
 
-/*
-var doUpdateUploaders = function()
-{
-    var dToday      = new Date(),
-        dYesterday  = new (function(d){ d.setDate(d.getDate()-1); return d})(new Date),
-
-        yesterday   = dYesterday.getUTCFullYear() + '-' + ("0" + (dYesterday.getUTCMonth() +　1)).slice(-2) + '-' + ("0" + (dYesterday.getUTCDate())).slice(-2),
-        today       = dToday.getUTCFullYear() + '-' + ("0" + (dToday.getUTCMonth() +　1)).slice(-2) + '-' + ("0" + (dToday.getUTCDate())).slice(-2);
-
-    $.ajax({
-        dataType: "json",
-        url: monitorEndPoint + 'getUploaders/?dateStart=' + yesterday + '&dateEnd = ' + today,
-        success: function(uploaders){
-            $.ajax({
-                dataType: "json",
-                url: monitorEndPoint + 'getTotalUploaders/',
-                success: function(uploadersTotal){
-                    var chart   = $('#uploaders .chart').highcharts(),
-                        series  = chart.get('uploaders');
-
-                    $('#uploaders .table tbody').empty();
-
-                    $.each(uploadersTotal, function(uploader, hits){
-                        if(uploader.length > 32)
-                            truncateUploader = jQuery.trim(uploader).substring(0, 32) + "..."
-                        else
-                            truncateUploader = uploader
-
-                        // Might happen when nothing is received...
-                        if(uploaders[yesterday] == undefined)
-                            uploaders[yesterday] = [];
-                        if(uploaders[today] == undefined)
-                            uploaders[today] = [];
-
-                        $('#uploaders .table tbody').append(
-                            newTr = $('<tr>').attr('data-name', uploader).on('mouseover', function(){
-                                chart.get('uploader-' + makeSlug(uploader)).setState('hover');
-                                chart.tooltip.refresh(chart.get('uploader-' + makeSlug(uploader)));
-                            }).on('mouseout', function(){
-                                chart.get('uploader-' + makeSlug(uploader)).setState('');
-                                chart.tooltip.hide();
-                            }).append(
-                                $('<td>').addClass('square')
-                            ).append(
-                                $('<td>').html('<strong>' + truncateUploader + '</strong>')
-                            )
-                            .append(
-                                $('<td>').addClass('stat today').html(formatNumber(uploaders[today][uploader] || 0))
-                            )
-                            .append(
-                                $('<td>').addClass('stat yesterday').html(formatNumber(uploaders[yesterday][uploader] || 0))
-                            )
-                            .append(
-                                $('<td>').addClass('stat total').html('<strong>' + formatNumber(hits) + '</strong>')
-                            )
-                        );
-
-                        if(!chart.get('uploader-' + makeSlug(uploader)))
-                            series.addPoint({id: 'uploader-' + makeSlug(uploader), name: uploader, y: parseInt(hits)}, false);
-                        else
-                            chart.get('uploader-' + makeSlug(uploader)).update(parseInt(hits), false);
-
-                        newTr.find('.square').css('background', chart.get('uploader-' + makeSlug(uploader)).color);
-                    });
-
-                    chart.redraw();
-
-                    $('#uploaders').find(".stat").removeClass("warning").each(function() {
-                        if ($(this).html() == "0")
-                            $(this).addClass("warning");
-                    });
-
-                    $('#uploaders').find(".update_timestamp").html(d.toString("yyyy-MM-dd HH:mm:ss"));
-                }
-            });
-        }
-    });
-}
-*/
-
 
 var doUpdateSchemas = function()
 {
@@ -702,13 +622,6 @@ var start       = function(){
             data: []
         }]
     });
-
-    /*
-    doUpdateUploaders();
-    setInterval(function(){
-        doUpdateUploaders();
-    }, updateInterval);
-    */
 
     // Grab schema from monitor
     $('#schemas .chart').highcharts({
