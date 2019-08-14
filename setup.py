@@ -27,7 +27,7 @@ setup(
     package_dir = {'':'src'},
     data_files=[('ceddn/schemas', glob.glob("schemas/*.json"))],
     long_description="""The Canonn Elite Dangerous Data Network allows E:D players to share data. Not affiliated with Frontier Developments.""",
-    install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python", "python-dotenv", "strict-rfc3339", "pathlib"],
+    install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python", "python-dotenv", "strict-rfc3339", "pathlib", "requests"],
     entry_points={
         'console_scripts': [
             'ceddn-gateway = ceddn.Gateway:main',
