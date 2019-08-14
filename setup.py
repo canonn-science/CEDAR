@@ -26,9 +26,7 @@ setup(
     packages=find_packages('src', exclude=["*.tests"]),
     package_dir = {'':'src'},
     data_files=[('ceddn/schemas', glob.glob("schemas/*.json"))],
-    long_description="""\
-      The Canonn Elite Dangerous Data Network allows E:D players to share data. Not affiliated with Frontier Developments.
-      """,
+    long_description="""The Canonn Elite Dangerous Data Network allows E:D players to share data. Not affiliated with Frontier Developments.""",
     install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python"],
     entry_points={
         'console_scripts': [
@@ -37,4 +35,4 @@ setup(
             'ceddn-monitor = ceddn.Monitor:main',
             ],
         }
-      )
+    )
