@@ -15,7 +15,7 @@ LOGFILE="/var/log/ceddn/${NAME}.log"
 
 DAEMON="/usr/local/bin/${NAME}"
 
-EXEC_AS_USER="root"
+EXEC_AS_USER="ceddn"
 
 START_OPTS="--start --background --make-pidfile --pidfile ${PIDFILE} --chuid ${EXEC_AS_USER} --exec ${DAEMON}"
 STOP_OPTS="--stop --pidfile ${PIDFILE}"

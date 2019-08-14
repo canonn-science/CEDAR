@@ -6,8 +6,8 @@ from ceddn.conf.Version import __version__ as version
 from os.path import join, dirname
 from pathlib import Path
 from dotenv import load_dotenv
-dotenv_path = Path("/etc/ceddn/.env")
-load_dotenv(dotenv_path)
+path='/etc/ceddn/.env'
+load_dotenv(dotenv_path=path,verbose=True)
 
 
 class _Settings(object):
