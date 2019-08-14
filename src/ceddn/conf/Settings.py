@@ -28,7 +28,7 @@ class _Settings(object):
     RELAY_HTTP_BIND_ADDRESS                 = "0.0.0.0"
     RELAY_HTTP_PORT                         = 9090
 
-    RELAY_RECEIVER_BINDINGS                 = ["tcp://*:8500"]
+    RELAY_RECEIVER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     RELAY_SENDER_BINDINGS                   = ["tcp://*:9500"]
 
@@ -44,10 +44,10 @@ class _Settings(object):
     #  Gateway settings
     ###############################################################################
 
-    GATEWAY_HTTP_BIND_ADDRESS               = "0.0.0.0"
+    GATEWAY_HTTP_BIND_ADDRESS               = "127.0.0.1"
     GATEWAY_HTTP_PORT                       = 8081
 
-    GATEWAY_SENDER_BINDINGS                 = ["tcp://*:8500"]
+    GATEWAY_SENDER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     GATEWAY_JSON_SCHEMAS                    = {
 
@@ -64,7 +64,7 @@ class _Settings(object):
     MONITOR_HTTP_BIND_ADDRESS               = "0.0.0.0"
     MONITOR_HTTP_PORT                       = 9091
 
-    MONITOR_RECEIVER_BINDINGS               = ["tcp://*:8500"]
+    MONITOR_RECEIVER_BINDINGS               = ["tcp://127.0.0.1:8500"]
 
     MONITOR_DB = {
         "host":     os.getenv("MONITOR_DB_HOST"),
