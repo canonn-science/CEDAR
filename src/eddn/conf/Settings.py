@@ -1,8 +1,10 @@
 # coding: utf8
-
+import os
 import argparse
 import simplejson
 from eddn.conf.Version import __version__ as version
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class _Settings(object):
@@ -13,8 +15,8 @@ class _Settings(object):
     # Local installation settings
     ###############################################################################
 
-    CERT_FILE                               = '/etc/letsencrypt/live/eddn.edcd.io/fullchain.pem'
-    KEY_FILE                                = '/etc/letsencrypt/live/eddn.edcd.io/privkey.pem'
+    CERT_FILE                               = os.getenv("CERT_FILE")
+    KEY_FILE                                = os.getenv("KEY_FILE")
 
     ###############################################################################
     # Relay settings
@@ -45,42 +47,12 @@ class _Settings(object):
     GATEWAY_SENDER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     GATEWAY_JSON_SCHEMAS                    = {
-        "https://eddn.edcd.io/schemas/commodity/3"                  : "schemas/commodity-v3.0.json",
-        "https://eddn.edcd.io/schemas/commodity/3/test"             : "schemas/commodity-v3.0.json",
-
-        "https://eddn.edcd.io/schemas/shipyard/2"                   : "schemas/shipyard-v2.0.json",
-        "https://eddn.edcd.io/schemas/shipyard/2/test"              : "schemas/shipyard-v2.0.json",
-
-        "https://eddn.edcd.io/schemas/outfitting/2"                 : "schemas/outfitting-v2.0.json",
-        "https://eddn.edcd.io/schemas/outfitting/2/test"            : "schemas/outfitting-v2.0.json",
-
-        "https://eddn.edcd.io/schemas/blackmarket/1"                : "schemas/blackmarket-v1.0.json",
-        "https://eddn.edcd.io/schemas/blackmarket/1/test"           : "schemas/blackmarket-v1.0.json",
 
         "https://eddn.edcd.io/schemas/journal/1"                    : "schemas/journal-v1.0.json",
         "https://eddn.edcd.io/schemas/journal/1/test"               : "schemas/journal-v1.0.json",
     }
 
-    GATEWAY_OUTDATED_SCHEMAS                = [
-        "http://schemas.elite-markets.net/eddn/commodity/1",
-        "http://schemas.elite-markets.net/eddn/commodity/1/test",
-        "http://schemas.elite-markets.net/eddn/commodity/2",
-        "http://schemas.elite-markets.net/eddn/commodity/2/test",
-        "http://schemas.elite-markets.net/eddn/commodity/3",
-        "http://schemas.elite-markets.net/eddn/commodity/3/test",
-        "http://schemas.elite-markets.net/eddn/outfitting/1",
-        "http://schemas.elite-markets.net/eddn/outfitting/1/test",
-        "http://schemas.elite-markets.net/eddn/outfitting/2",
-        "http://schemas.elite-markets.net/eddn/outfitting/2/test",
-        "http://schemas.elite-markets.net/eddn/shipyard/1",
-        "http://schemas.elite-markets.net/eddn/shipyard/1/test",
-        "http://schemas.elite-markets.net/eddn/shipyard/2",
-        "http://schemas.elite-markets.net/eddn/shipyard/2/test",
-        "http://schemas.elite-markets.net/eddn/blackmarket/1",
-        "http://schemas.elite-markets.net/eddn/blackmarket/1/test",
-        "http://schemas.elite-markets.net/eddn/journal/1",
-        "http://schemas.elite-markets.net/eddn/journal/1/test",
-    ]
+    GATEWAY_OUTDATED_SCHEMAS                = []
 
     ###############################################################################
     #  Monitor settings
@@ -92,12 +64,12 @@ class _Settings(object):
     MONITOR_RECEIVER_BINDINGS               = ["tcp://127.0.0.1:8500"]
 
     MONITOR_DB                              = {
-        "user":     "eddn",
-        "password": "cvLYM8AEqg29YTatFMEcqph3YkDWUMvC",
-        "database": "eddn"
+        "user":     os.getenv("MONITOR_DB_USER"),
+        "password": os.getenv("MONITOR_DB_PASS"),
+        "database": os.getenv("MONITOR_DB_NAME")
     }
 
-    MONITOR_UA                              = "UA-496332-23"
+    MONITOR_UA                              = os.getenv("MONITOR_GA_UA")
 
 
 
