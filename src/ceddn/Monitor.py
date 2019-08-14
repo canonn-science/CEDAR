@@ -14,8 +14,8 @@ import zmq.green as zmq
 import re
 
 from bottle import get, request, response, run as bottle_run
-from eddn.conf.Settings import Settings, loadConfig
-from eddn.core.Analytics import Analytics
+from ceddn.conf.Settings import Settings, loadConfig
+from ceddn.core.Analytics import Analytics
 
 from gevent import monkey
 monkey.patch_all()

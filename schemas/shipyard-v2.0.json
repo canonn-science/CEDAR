@@ -1,6 +1,6 @@
 {
     "$schema"               : "http://json-schema.org/draft-04/schema#",
-    "id"                    : "https://eddn.edcd.io/schemas/shipyard/2#",
+    "id"                    : "https://ceddn.canonn.tech/schemas/shipyard/2#",
     "type"                  : "object",
     "additionalProperties"  : false,
     "required"              : [ "$schemaRef", "header", "message" ],

@@ -32,9 +32,9 @@ setup(
     install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python"],
     entry_points={
         'console_scripts': [
-            'eddn-gateway = eddn.Gateway:main',
-            'eddn-relay = eddn.Relay:main',
-            'eddn-monitor = eddn.Monitor:main',
+            'eddn-gateway = ceddn.Gateway:main',
+            'eddn-relay = ceddn.Relay:main',
+            'eddn-monitor = ceddn.Monitor:main',
             ],
         }
       )

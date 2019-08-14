@@ -2,7 +2,7 @@
 import os
 import argparse
 import simplejson
-from eddn.conf.Version import __version__ as version
+from ceddn.conf.Version import __version__ as version
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -48,8 +48,8 @@ class _Settings(object):
 
     GATEWAY_JSON_SCHEMAS                    = {
 
-        "https://eddn.edcd.io/schemas/journal/1"                    : "schemas/journal-v1.0.json",
-        "https://eddn.edcd.io/schemas/journal/1/test"               : "schemas/journal-v1.0.json",
+        "https://ceddn.canonn.tech/schemas/journal/1"                    : "schemas/journal-v1.0.json",
+        "https://ceddn.canonn.tech/schemas/journal/1/test"               : "schemas/journal-v1.0.json",
     }
 
     GATEWAY_OUTDATED_SCHEMAS                = []

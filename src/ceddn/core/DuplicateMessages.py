@@ -4,7 +4,7 @@ import re
 import simplejson
 
 from datetime import datetime, timedelta
-from eddn.conf.Settings import Settings
+from ceddn.conf.Settings import Settings
 from threading import Lock, Thread
 from time import sleep
 

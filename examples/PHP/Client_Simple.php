@@ -2,7 +2,7 @@
 /**
  *  Configuration
  */
-$relayEDDN              = 'tcp://eddn.edcd.io:9500';
+$relayEDDN              = 'tcp://ceddn.canonn.tech:9500';
 $timeoutEDDN            = 600000;
 
 

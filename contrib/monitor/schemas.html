@@ -8,7 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./css/eddn.css" rel="stylesheet" />
+    <link href="./css/ceddn.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -121,13 +121,13 @@
     	return finishedslug.toLowerCase();
     }
     var makeName =  function(str) {
-        var match = /^https:\/\/eddn.edcd.io\/schemas\/(\w)(\w*)\/(\d+)$/.exec(str);
+        var match = /^https:\/\/ceddn.canonn.tech\/schemas\/(\w)(\w*)\/(\d+)$/.exec(str);
         if(match)
         {
             return match[1].toUpperCase() + match[2] + " v" + match[3];
         }
         
-        var match = /^https:\/\/eddn.edcd.io\/schemas\/(\w)(\w*)\/(\d+)\/test$/.exec(str);
+        var match = /^https:\/\/ceddn.canonn.tech\/schemas\/(\w)(\w*)\/(\d+)\/test$/.exec(str);
         if(match)
         {
             return match[1].toUpperCase() + match[2] + " v" + match[3] + " [TEST]";
@@ -137,7 +137,7 @@
     }
 
     $(document).ready(function(){
-        var monitorEndPoint     = 'https://eddn.edcd.io:9091/';
+        var monitorEndPoint     = 'https://ceddn.canonn.tech:9091/';
         
         var chartContainer = $('#schemas .charts');
         
@@ -231,7 +231,7 @@
                     // Convert old schemas and sum them to new schemas
                     schemasCount = {};
                     $.each(schemasCountTmp, function(schema, hits){
-                        schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://eddn.edcd.io/schemas/');
+                        schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://ceddn.canonn.tech/schemas/');
                         hits   = parseInt(hits);
                         
                         if(schemasCount[schema]){ schemasCount[schema] += hits; }
