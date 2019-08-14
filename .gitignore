@@ -61,3 +61,5 @@ target/
 \.vscode/
 
 examples/Sample Logs/Journal\.190813150620\.01\.json
+
+src/ceddn/conf/\.env
