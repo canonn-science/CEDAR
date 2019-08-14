@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "zeromq": "^4.2.0",
+    "zeromq": "^5.1.0",
     "zlib": "^1.0.5"
   }
 }
