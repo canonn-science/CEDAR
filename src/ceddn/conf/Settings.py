@@ -12,7 +12,7 @@ load_dotenv(dotenv_path=path,verbose=True)
 
 class _Settings(object):
 
-    EDDN_VERSION = version
+    CEDDN_VERSION = version
 
     ###############################################################################
     # Local installation settings

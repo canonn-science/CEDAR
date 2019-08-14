@@ -161,6 +161,8 @@ def parse_and_error_handle(data):
 @post('/upload/')
 def upload():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     try:
         # Body may or may not be compressed.
         message_body = get_decompressed_message()
@@ -188,14 +190,16 @@ def health_check():
     to detect whether the gateway is still alive, and whether it should remain
     in the DNS rotation.
     """
-    return Settings.EDDN_VERSION
+    return Settings.CEDDN_VERSION
 
 
 @get('/stats/')
 def stats():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     stats = statsCollector.getSummary()
-    stats["version"] = Settings.EDDN_VERSION
+    stats["version"] = Settings.CEDDN_VERSION
     return simplejson.dumps(stats)
 
 

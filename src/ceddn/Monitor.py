@@ -40,6 +40,8 @@ def ping():
 @get('/getTotalSoftwares/')
 def getTotalSoftwares():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     softwares = collections.OrderedDict()
 
@@ -66,6 +68,8 @@ def getTotalSoftwares():
 @get('/getSoftwares/')
 def getSoftwares():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     softwares = collections.OrderedDict()
 
@@ -95,6 +99,8 @@ def getSoftwares():
 @get('/getTotalSchemas/')
 def getTotalSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     schemas = collections.OrderedDict()
 
@@ -117,6 +123,8 @@ def getTotalSchemas():
 @get('/getSchemas/')
 def getSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     #db.text_factory = lambda x: unicode(x, "utf-8", "ignore")
     schemas = collections.OrderedDict()

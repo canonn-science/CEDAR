@@ -39,8 +39,10 @@ if Settings.RELAY_DUPLICATE_MAX_MINUTES:
 @get('/stats/')
 def stats():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     stats = statsCollector.getSummary()
-    stats["version"] = Settings.EDDN_VERSION
+    stats["version"] = Settings.CEDDN_VERSION
     return simplejson.dumps(stats)
 
 
