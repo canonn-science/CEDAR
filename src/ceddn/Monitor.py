@@ -85,11 +85,11 @@ def getSoftwares():
     results.execute(query, (dateStart, dateEnd))
 
     for row in results:
-        currentDate = row[2].strftime('%Y-%m-%d')
+        currentDate = row[3].strftime('%Y-%m-%d')
         if not currentDate in softwares.keys():
             softwares[currentDate] = collections.OrderedDict()
 
-        softwares[currentDate][str(row[0])] = str(row[1])
+        softwares[currentDate][str(row[1])] = str(row[2])
 
     db.close()
 
@@ -141,11 +141,11 @@ def getSchemas():
     results.execute(query, (dateStart, dateEnd))
 
     for row in results:
-        currentDate = row[2].strftime('%Y-%m-%d')
+        currentDate = row[3].strftime('%Y-%m-%d')
         if not currentDate in schemas.keys():
             schemas[currentDate] = collections.OrderedDict()
 
-        schemas[currentDate][str(row[0])] = str(row[1])
+        schemas[currentDate][str(row[1])] = str(row[2])
 
     db.close()
 
