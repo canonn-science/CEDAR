@@ -68,7 +68,7 @@ class _Settings(object):
 
     MONITOR_DB = {
         "host":     os.getenv("MONITOR_DB_HOST"),
-        "post":     os.getenv("MONITOR_DB_PORT"),
+        "port":     os.getenv("MONITOR_DB_PORT"),
         "user":     os.getenv("MONITOR_DB_USER"),
         "password": os.getenv("MONITOR_DB_PASS"),
         "database": os.getenv("MONITOR_DB_NAME")
