@@ -59,3 +59,5 @@ target/
 /examples/CSharp/ConsoleApp/ConsoleApp/obj
 /nbproject/private/
 \.vscode/
+
+examples/Sample Logs/Journal\.190813150620\.01\.json
