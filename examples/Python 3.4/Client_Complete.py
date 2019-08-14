@@ -6,7 +6,7 @@ import sys, os, datetime, time
 """
  "  Configuration
 """
-__relayEDDN             = 'tcp://eddn.edcd.io:9500'
+__relayEDDN             = 'tcp://ceddn.canonn.tech:9500'
 __timeoutEDDN           = 600000
 
 # Set False to listen to production stream
@@ -127,13 +127,13 @@ def main():
 
 
                 # Handle commodity v1
-                if __json['$schemaRef'] == 'https://eddn.edcd.io/schemas/commodity/1' + ('/test' if (__debugEDDN == True) else ''):
+                if __json['$schemaRef'] == 'https://ceddn.canonn.tech/schemas/commodity/1' + ('/test' if (__debugEDDN == True) else ''):
                     echoLogJSON(__message)
                     echoLog('Receiving commodity-v1 message...')
                     echoLog('    - Converting to v3...')
 
                     __temp                              = {}
-                    __temp['$schemaRef']                = 'https://eddn.edcd.io/schemas/commodity/3' + ('/test' if (__debugEDDN == True) else '')
+                    __temp['$schemaRef']                = 'https://ceddn.canonn.tech/schemas/commodity/3' + ('/test' if (__debugEDDN == True) else '')
                     __temp['header']                    = __json['header']
 
                     __temp['message']                   = {}
@@ -169,7 +169,7 @@ def main():
                     __converted = True
 
                 # Handle commodity v3
-                if __json['$schemaRef'] == 'https://eddn.edcd.io/schemas/commodity/3' + ('/test' if (__debugEDDN == True) else ''):
+                if __json['$schemaRef'] == 'https://ceddn.canonn.tech/schemas/commodity/3' + ('/test' if (__debugEDDN == True) else ''):
                     if __converted == False:
                         echoLogJSON(__message)
                         echoLog('Receiving commodity-v3 message...')

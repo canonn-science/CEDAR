@@ -1,0 +1,17 @@
+{
+	"timestamp": "2019-08-14T01:58:42Z",
+	"event": "CodexEntry",
+	"EntryID": 2100101,
+	"Name": "$Codex_Ent_Thargoid_Barnacle_01_Name;",
+	"Name_Localised": "Common Thargoid Barnacle",
+	"SubCategory": "$Codex_SubCategory_Organic_Structures;",
+	"SubCategory_Localised": "Organic structures",
+	"Category": "$Codex_Category_Biology;",
+	"Category_Localised": "Biological and Geological",
+	"Region": "$Codex_RegionName_18;",
+	"Region_Localised": "Inner Orion Spur",
+	"System": "Pleiades Sector QD-T c3-3",
+	"SystemAddress": 908351869594,
+	"IsNewEntry": true,
+	"VoucherAmount": 50000
+}

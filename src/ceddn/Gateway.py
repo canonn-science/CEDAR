@@ -2,7 +2,7 @@
 
 """
 Contains the necessary ZeroMQ socket and a helper function to publish
-market data to the Announcer daemons.
+data to the Announcer daemons.
 """
 import gevent
 import hashlib
@@ -16,8 +16,8 @@ from datetime import datetime
 from pkg_resources import resource_string
 # import os
 
-from eddn.conf.Settings import Settings, loadConfig
-from eddn.core.Validator import Validator, ValidationSeverity
+from ceddn.conf.Settings import Settings, loadConfig
+from ceddn.core.Validator import Validator, ValidationSeverity
 
 from gevent import monkey
 monkey.patch_all()
@@ -32,7 +32,7 @@ sender = context.socket(zmq.PUB)
 validator = Validator()
 
 # This import must be done post-monkey-patching!
-from eddn.core.StatsCollector import StatsCollector
+from ceddn.core.StatsCollector import StatsCollector
 statsCollector = StatsCollector()
 statsCollector.start()
 
@@ -45,7 +45,7 @@ def configure():
         sender.bind(binding)
 
     for schemaRef, schemaFile in Settings.GATEWAY_JSON_SCHEMAS.iteritems():
-        validator.addSchemaResource(schemaRef, resource_string('eddn.Gateway', schemaFile))
+        validator.addSchemaResource(schemaRef, resource_string('ceddn.Gateway', schemaFile))
 
 
 def push_message(parsed_message, topic):

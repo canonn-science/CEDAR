@@ -14,15 +14,15 @@ import zmq.green as zmq
 import re
 
 from bottle import get, request, response, run as bottle_run
-from eddn.conf.Settings import Settings, loadConfig
-from eddn.core.Analytics import Analytics
+from ceddn.conf.Settings import Settings, loadConfig
+from ceddn.core.Analytics import Analytics
 
 from gevent import monkey
 monkey.patch_all()
 
 # This import must be done post-monkey-patching!
 if Settings.RELAY_DUPLICATE_MAX_MINUTES:
-    from eddn.core.DuplicateMessages import DuplicateMessages
+    from ceddn.core.DuplicateMessages import DuplicateMessages
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
 
@@ -40,7 +40,7 @@ def ping():
 @get('/getTotalSoftwares/')
 def getTotalSoftwares():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     softwares = collections.OrderedDict()
 
     maxDays = request.GET.get('maxDays', '31').strip()
@@ -66,7 +66,7 @@ def getTotalSoftwares():
 @get('/getSoftwares/')
 def getSoftwares():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     softwares = collections.OrderedDict()
 
     dateStart = request.GET.get('dateStart', str(date('%Y-%m-%d'))).strip()
@@ -95,7 +95,7 @@ def getSoftwares():
 @get('/getTotalSchemas/')
 def getTotalSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     schemas = collections.OrderedDict()
 
     query = """SELECT `name`, SUM(`hits`) AS `total`
@@ -117,7 +117,7 @@ def getTotalSchemas():
 @get('/getSchemas/')
 def getSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     #db.text_factory = lambda x: unicode(x, "utf-8", "ignore")
     schemas = collections.OrderedDict()
 
@@ -158,7 +158,7 @@ class Monitor(Thread):
             receiver.connect(binding)
 
         def monitor_worker(message):
-            db = mariadb.connect(user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+            db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
 
             # Separate topic from message
             message = message.split(' |-| ')

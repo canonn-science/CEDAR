@@ -19,19 +19,19 @@ import hashlib
 import uuid
 import zmq.green as zmq
 from bottle import get, response, run as bottle_run
-from eddn.conf.Settings import Settings, loadConfig
+from ceddn.conf.Settings import Settings, loadConfig
 
 from gevent import monkey
 monkey.patch_all()
 
 # This import must be done post-monkey-patching!
-from eddn.core.StatsCollector import StatsCollector
+from ceddn.core.StatsCollector import StatsCollector
 statsCollector = StatsCollector()
 statsCollector.start()
 
 # This import must be done post-monkey-patching!
 if Settings.RELAY_DUPLICATE_MAX_MINUTES:
-    from eddn.core.DuplicateMessages import DuplicateMessages
+    from ceddn.core.DuplicateMessages import DuplicateMessages
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
 
