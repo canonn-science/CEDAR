@@ -53,6 +53,9 @@ class _Settings(object):
 
         "https://ceddn.canonn.tech/schemas/codex/1"         : "schemas/codex-v1.0.json",
         "https://ceddn.canonn.tech/schemas/codex/1/test"    : "schemas/codex-v1.0.json",
+        "https://ceddn.canonn.tech/schemas/material/1"         : "schemas/material-v1.0.json",
+        "https://ceddn.canonn.tech/schemas/material/1/test"    : "schemas/material-v1.0.json"
+
     }
 
     GATEWAY_OUTDATED_SCHEMAS                = []
