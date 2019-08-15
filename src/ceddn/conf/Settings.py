@@ -50,12 +50,10 @@ class _Settings(object):
     GATEWAY_SENDER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     GATEWAY_JSON_SCHEMAS                    = {
-
         "https://ceddn.canonn.tech/schemas/codex/1"         : "schemas/codex-v1.0.json",
         "https://ceddn.canonn.tech/schemas/codex/1/test"    : "schemas/codex-v1.0.json",
         "https://ceddn.canonn.tech/schemas/material/1"         : "schemas/material-v1.0.json",
         "https://ceddn.canonn.tech/schemas/material/1/test"    : "schemas/material-v1.0.json"
-
     }
 
     GATEWAY_OUTDATED_SCHEMAS                = []
@@ -78,6 +76,12 @@ class _Settings(object):
     }
 
     MONITOR_UA                              = os.getenv("MONITOR_GA_UA")
+    ###############################################################################
+    #  Canonn API settings
+    ###############################################################################
+
+    # Used to fire POST requests directly to the Canonn APIv2 endpoints
+    CAPI_ADDRESS                            = os.getenv("CAPI_URL")
 
 
 

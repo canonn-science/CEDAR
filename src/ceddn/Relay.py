@@ -148,6 +148,7 @@ class Relay(Thread):
             message = zlib.compress(message)
 
             # Send message
+            ## TODO - Add direct POST request to CAPIv2 for message
             sender.send(message)
             statsCollector.tally("outbound")
 
