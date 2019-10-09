@@ -19,19 +19,19 @@ import hashlib
 import uuid
 import zmq.green as zmq
 from bottle import get, response, run as bottle_run
-from ceddn.conf.Settings import Settings, loadConfig
+from cedar.conf.Settings import Settings, loadConfig
 
 from gevent import monkey
 monkey.patch_all()
 
 # This import must be done post-monkey-patching!
-from ceddn.core.StatsCollector import StatsCollector
+from cedar.core.StatsCollector import StatsCollector
 statsCollector = StatsCollector()
 statsCollector.start()
 
 # This import must be done post-monkey-patching!
 if Settings.RELAY_DUPLICATE_MAX_MINUTES:
-    from ceddn.core.DuplicateMessages import DuplicateMessages
+    from cedar.core.DuplicateMessages import DuplicateMessages
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
 
@@ -42,7 +42,7 @@ def stats():
     response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
     response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     stats = statsCollector.getSummary()
-    stats["version"] = Settings.CEDDN_VERSION
+    stats["version"] = Settings.CEDAR_VERSION
     return simplejson.dumps(stats)
 
 

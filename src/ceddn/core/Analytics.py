@@ -5,7 +5,7 @@ from hashlib import sha1
 from random import randint
 
 from traceback import print_exc
-from ceddn.conf.Settings import Settings
+from cedar.conf.Settings import Settings
 
 class Analytics(object):
     mobileProperty  = 'MO' + Settings.MONITOR_UA[2:]

@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "https://ceddn.canonn.tech/schemas/codex/1#",
+	"id": "https://cedar.canonn.tech/schemas/codex/1#",
 	"type": "object",
 	"additionalProperties": false,
 	"required": ["$schemaRef", "header", "message"],

@@ -1,17 +1,17 @@
 #!/bin/sh
 
 ### BEGIN INIT INFO
-# Provides: eddn-gateway
+# Provides: eddn-monitor
 # Required-Start: $network
 # Required-Stop:
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
 ### END INIT INFO
 
-NAME=ceddn-gateway
-DESC="ceddn-gateway"
+NAME=cedar-monitor
+DESC="cedar-monitor"
 PIDFILE="/var/run/${NAME}.pid"
-LOGFILE="/var/log/ceddn/${NAME}.log"
+LOGFILE="/var/log/cedar/${NAME}.log"
 
 DAEMON="/usr/local/bin/${NAME}"
 

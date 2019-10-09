@@ -1,6 +1,6 @@
 -- MySQL dump 10.17  Distrib 10.3.17-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: dbn5.rd.canonn.tech    Database: ceddn
+-- Host: dbn5.rd.canonn.tech    Database: cedar
 -- ------------------------------------------------------
 -- Server version	10.3.16-MariaDB-1:10.3.16+maria~bionic-log
 
@@ -64,7 +64,7 @@ CREATE TABLE `uploaders` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping routines for database 'ceddn'
+-- Dumping routines for database 'cedar'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

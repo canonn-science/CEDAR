@@ -14,15 +14,15 @@ import zmq.green as zmq
 import re
 
 from bottle import get, request, response, run as bottle_run
-from ceddn.conf.Settings import Settings, loadConfig
-from ceddn.core.Analytics import Analytics
+from cedar.conf.Settings import Settings, loadConfig
+from cedar.core.Analytics import Analytics
 
 from gevent import monkey
 monkey.patch_all()
 
 # This import must be done post-monkey-patching!
 if Settings.RELAY_DUPLICATE_MAX_MINUTES:
-    from ceddn.core.DuplicateMessages import DuplicateMessages
+    from cedar.core.DuplicateMessages import DuplicateMessages
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
 

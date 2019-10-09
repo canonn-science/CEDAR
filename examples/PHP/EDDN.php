@@ -39,13 +39,13 @@ class EDDN
     private static $_debug    = true;
 
     private static $_gateways = array(
-        'https://ceddn.canonn.tech:8080/upload/',
+        'https://cedar.canonn.tech:8080/upload/',
     );
 
     private static $_schemas   = array(
         'commodity-v3' => array(
-            'production'    => 'https://ceddn.canonn.tech/schemas/commodity/3',
-            'test'          => 'https://ceddn.canonn.tech/schemas/commodity/3/test',
+            'production'    => 'https://cedar.canonn.tech/schemas/commodity/3',
+            'test'          => 'https://cedar.canonn.tech/schemas/commodity/3/test',
         ),
     );
 
