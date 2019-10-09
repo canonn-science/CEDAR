@@ -35,7 +35,6 @@ if Settings.RELAY_DUPLICATE_MAX_MINUTES:
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
 
-
 @get('/stats/')
 def stats():
     response.set_header("Access-Control-Allow-Origin", "*")
@@ -44,7 +43,6 @@ def stats():
     stats = statsCollector.getSummary()
     stats["version"] = Settings.CEDAR_VERSION
     return simplejson.dumps(stats)
-
 
 class Relay(Thread):
 
@@ -159,7 +157,6 @@ class Relay(Thread):
             statsCollector.tally("inbound")
             gevent.spawn(relay_worker, inboundMessage)
 
-
 def main():
     loadConfig()
     r = Relay()
@@ -171,7 +168,6 @@ def main():
         certfile=Settings.CERT_FILE,
         keyfile=Settings.KEY_FILE
     )
-
 
 if __name__ == '__main__':
     main()

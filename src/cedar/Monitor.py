@@ -26,16 +26,13 @@ if Settings.RELAY_DUPLICATE_MAX_MINUTES:
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
 
-
 def date(__format):
     d = datetime.datetime.utcnow()
     return d.strftime(__format)
 
-
 @get('/ping')
 def ping():
     return 'pong'
-
 
 @get('/getTotalSoftwares/')
 def getTotalSoftwares():
@@ -49,10 +46,10 @@ def getTotalSoftwares():
     maxDays = int(maxDays) - 1
 
     query = """SELECT name, SUM(hits) AS total, MAX(dateStats) AS maxDate
-               FROM softwares
-               GROUP BY name
-               HAVING maxDate >= DATE_SUB(NOW(), INTERVAL %s DAY)
-               ORDER BY total DESC"""
+                FROM softwares
+                GROUP BY name
+                HAVING maxDate >= DATE_SUB(NOW(), INTERVAL %s DAY)
+                ORDER BY total DESC"""
 
     results = db.cursor()
     results.execute(query, (maxDays, ))
@@ -63,7 +60,6 @@ def getTotalSoftwares():
     db.close()
 
     return simplejson.dumps(softwares)
-
 
 @get('/getSoftwares/')
 def getSoftwares():
@@ -77,9 +73,9 @@ def getSoftwares():
     dateEnd = request.GET.get('dateEnd', str(date('%Y-%m-%d'))).strip()
 
     query = """SELECT *
-               FROM `softwares`
-               WHERE `dateStats` BETWEEN %s AND %s
-               ORDER BY `hits` DESC, `dateStats` ASC"""
+                FROM `softwares`
+                WHERE `dateStats` BETWEEN %s AND %s
+                ORDER BY `hits` DESC, `dateStats` ASC"""
 
     results = db.cursor()
     results.execute(query, (dateStart, dateEnd))
@@ -95,7 +91,6 @@ def getSoftwares():
 
     return simplejson.dumps(softwares)
 
-
 @get('/getTotalSchemas/')
 def getTotalSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
@@ -105,9 +100,9 @@ def getTotalSchemas():
     schemas = collections.OrderedDict()
 
     query = """SELECT `name`, SUM(`hits`) AS `total`
-               FROM `schemas`
-               GROUP BY `name`
-               ORDER BY `total` DESC"""
+                FROM `schemas`
+                GROUP BY `name`
+                ORDER BY `total` DESC"""
 
     results = db.cursor()
     results.execute(query)
@@ -118,7 +113,6 @@ def getTotalSchemas():
     db.close()
 
     return simplejson.dumps(schemas)
-
 
 @get('/getSchemas/')
 def getSchemas():
@@ -133,9 +127,9 @@ def getSchemas():
     dateEnd = request.GET.get('dateEnd', str(date('%Y-%m-%d'))).strip()
 
     query = """SELECT *
-               FROM `schemas`
-               WHERE `dateStats` BETWEEN %s AND %s
-               ORDER BY `hits` DESC, `dateStats` ASC"""
+                FROM `schemas`
+                WHERE `dateStats` BETWEEN %s AND %s
+                ORDER BY `hits` DESC, `dateStats` ASC"""
 
     results = db.cursor()
     results.execute(query, (dateStart, dateEnd))
@@ -150,7 +144,6 @@ def getSchemas():
     db.close()
 
     return simplejson.dumps(schemas)
-
 
 class Monitor(Thread):
 
@@ -227,7 +220,6 @@ class Monitor(Thread):
             inboundMessage = receiver.recv()
             gevent.spawn(monitor_worker, inboundMessage)
 
-
 def main():
     loadConfig()
     m = Monitor()
@@ -239,7 +231,6 @@ def main():
         certfile=Settings.CERT_FILE,
         keyfile=Settings.KEY_FILE
     )
-
 
 if __name__ == '__main__':
     main()
