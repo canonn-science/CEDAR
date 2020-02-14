@@ -141,6 +141,7 @@ class Relay(Thread):
 
             # Convert message back to JSON
             message = simplejson.dumps(json, sort_keys=True)
+            print message
 
             # Recompress message
             message = zlib.compress(message)
