@@ -16,8 +16,8 @@ from datetime import datetime
 from pkg_resources import resource_string
 # import os
 
-from ceddn.conf.Settings import Settings, loadConfig
-from ceddn.core.Validator import Validator, ValidationSeverity
+from cedar.conf.Settings import Settings, loadConfig
+from cedar.core.Validator import Validator, ValidationSeverity
 
 from gevent import monkey
 monkey.patch_all()
@@ -32,7 +32,7 @@ sender = context.socket(zmq.PUB)
 validator = Validator()
 
 # This import must be done post-monkey-patching!
-from ceddn.core.StatsCollector import StatsCollector
+from cedar.core.StatsCollector import StatsCollector
 statsCollector = StatsCollector()
 statsCollector.start()
 
@@ -45,7 +45,7 @@ def configure():
         sender.bind(binding)
 
     for schemaRef, schemaFile in Settings.GATEWAY_JSON_SCHEMAS.iteritems():
-        validator.addSchemaResource(schemaRef, resource_string('ceddn.Gateway', schemaFile))
+        validator.addSchemaResource(schemaRef, resource_string('cedar.Gateway', schemaFile))
 
 
 def push_message(parsed_message, topic):
@@ -161,6 +161,8 @@ def parse_and_error_handle(data):
 @post('/upload/')
 def upload():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     try:
         # Body may or may not be compressed.
         message_body = get_decompressed_message()
@@ -188,14 +190,16 @@ def health_check():
     to detect whether the gateway is still alive, and whether it should remain
     in the DNS rotation.
     """
-    return Settings.EDDN_VERSION
+    return Settings.CEDAR_VERSION
 
 
 @get('/stats/')
 def stats():
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
     stats = statsCollector.getSummary()
-    stats["version"] = Settings.EDDN_VERSION
+    stats["version"] = Settings.CEDAR_VERSION
     return simplejson.dumps(stats)
 
 

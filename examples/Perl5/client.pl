@@ -9,7 +9,7 @@ sub msg {
   printf STDERR @_;
 }
 
-my $endpoint = "tcp://ceddn.canonn.tech:9500";
+my $endpoint = "tcp://cedar.canonn.tech:9500";
 my $ctx      = ZMQ::FFI->new();
 
 my $s = $ctx->socket(ZMQ_SUB);
@@ -27,7 +27,7 @@ while(1)
   my $schema = $pj->{'$schemaRef'};
   msg "schema = %s\n", $schema;
   msg "  software = %s\n", $pj->{header}->{softwareName};
-  if ($schema eq "https://ceddn.canonn.tech/schemas/journal/1") {
+  if ($schema eq "https://cedar.canonn.tech/schemas/journal/1") {
     my $event = $pj->{message}->{event};
     if ($event eq "FSDJump") {
       msg "  StarSystem = %s\n", $pj->{message}->{StarSystem};

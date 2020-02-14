@@ -2,17 +2,17 @@
 import os
 import argparse
 import simplejson
-from ceddn.conf.Version import __version__ as version
+from cedar.conf.Version import __version__ as version
 from os.path import join, dirname
 from pathlib import Path
 from dotenv import load_dotenv
-dotenv_path = Path("/etc/ceddn/.env")
-load_dotenv(dotenv_path)
+path='/etc/cedar/.env'
+load_dotenv(dotenv_path=path,verbose=True)
 
 
 class _Settings(object):
 
-    EDDN_VERSION = version
+    CEDAR_VERSION = version
 
     ###############################################################################
     # Local installation settings
@@ -50,9 +50,10 @@ class _Settings(object):
     GATEWAY_SENDER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     GATEWAY_JSON_SCHEMAS                    = {
-
-        "https://ceddn.canonn.tech/schemas/codex/1"         : "schemas/codex-v1.0.json",
-        "https://ceddn.canonn.tech/schemas/codex/1/test"    : "schemas/codex-v1.0.json",
+        "https://cedar.canonn.tech/schemas/codex/1"         : "schemas/codex-v1.0.json",
+        "https://cedar.canonn.tech/schemas/codex/1/test"    : "schemas/codex-v1.0.json",
+        "https://cedar.canonn.tech/schemas/material/1"         : "schemas/material-v1.0.json",
+        "https://cedar.canonn.tech/schemas/material/1/test"    : "schemas/material-v1.0.json"
     }
 
     GATEWAY_OUTDATED_SCHEMAS                = []
@@ -68,13 +69,19 @@ class _Settings(object):
 
     MONITOR_DB = {
         "host":     os.getenv("MONITOR_DB_HOST"),
-        "post":     os.getenv("MONITOR_DB_PORT"),
+        "port":     os.getenv("MONITOR_DB_PORT"),
         "user":     os.getenv("MONITOR_DB_USER"),
         "password": os.getenv("MONITOR_DB_PASS"),
         "database": os.getenv("MONITOR_DB_NAME")
     }
 
     MONITOR_UA                              = os.getenv("MONITOR_GA_UA")
+    ###############################################################################
+    #  Canonn API settings
+    ###############################################################################
+
+    # Used to fire POST requests directly to the Canonn APIv2 endpoints
+    CAPI_ADDRESS                            = os.getenv("CAPI_URL")
 
 
 

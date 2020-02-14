@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "https://cedar.canonn.tech/schemas/codex/1#",
+	"id": "https://cedar.canonn.tech/schemas/material/1#",
 	"type": "object",
 	"additionalProperties": false,
 	"required": ["$schemaRef", "header", "message"],
@@ -34,20 +34,19 @@
 		},
 		"message": {
 			"type": "object",
-			"description": "Contains all properties from the codex event in the client's journal minus Localised strings and the properties marked below as 'disallowed'",
+			"description": "Contains all properties from the materialcollected event and the materialreward from the mission event in the client's journal minus Localised strings and the properties marked below as 'disallowed'",
 			"additionalProperties": true,
-			"required": ["timestamp", "event", "EntryID", "System", "Region", "SystemAddress", "Name", "Category", "SubCategory"],
+			"required": ["timestamp", "event", "system", "region", "systemAddress", "collectedFrom", "category", "journalName", "count"],
 			"properties": {
 				"timestamp": {
 					"type": "string",
 					"format": "date-time"
 				},
 				"event": {
-					"enum": ["CodexEntry"]
-				},
-				"EntryID": {
-					"type": "integer",
-					"description": "Should be added by the sender if not present in the journal event"
+					"enum": [
+						"MaterialCollected",
+						"MaterialsReward"
+					]
 				},
 				"System": {
 					"type": "string",
@@ -63,19 +62,26 @@
 					"type": "integer",
 					"description": "Should be added by the sender if not present in the journal event"
 				},
-				"Name": {
+				"collectedFrom": {
+					"enum": [
+						"missionReward",
+						"collected",
+						"scanned"
+					],
+					"description": "Should be added by the sender depending on the event type and response"
+				},
+				"category": {
 					"type": "string",
 					"minLength": 1,
 					"description": "Must be added by the sender if not present in the journal event"
 				},
-				"Category": {
+				"journalName": {
 					"type": "string",
 					"minLength": 1,
 					"description": "Must be added by the sender if not present in the journal event"
 				},
-				"SubCategory": {
-					"type": "string",
-					"minLength": 1,
+				"count": {
+					"type": "integer",
 					"description": "Must be added by the sender if not present in the journal event"
 				},
 				"Latitude": {

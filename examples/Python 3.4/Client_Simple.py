@@ -7,7 +7,7 @@ import time
 """
  "  Configuration
 """
-__relayEDDN             = 'tcp://ceddn.canonn.tech:9500'
+__relayEDDN             = 'tcp://cedar.canonn.tech:9500'
 __timeoutEDDN           = 600000
 
 

@@ -2,7 +2,7 @@
 /**
  *  Configuration
  */
-$relayEDDN              = 'tcp://ceddn.canonn.tech:9500';
+$relayEDDN              = 'tcp://cedar.canonn.tech:9500';
 $timeoutEDDN            = 600000;
 
 // Set false to listen to production stream
@@ -125,14 +125,14 @@ while (true)
             $converted  = false;
 
             // Handle commodity v1
-            if($json['$schemaRef'] == 'https://ceddn.canonn.tech/schemas/commodity/1' . (($debugEDDN === true) ? '/test' : ''))
+            if($json['$schemaRef'] == 'https://cedar.canonn.tech/schemas/commodity/1' . (($debugEDDN === true) ? '/test' : ''))
             {
                 echoLogJSON($message);
                 echoLog('Receiving commodity-v1 message...');
                 echoLog('    - Converting to v2...');
 
                 $temp                           = array();
-                $temp['$schemaRef']             = 'https://ceddn.canonn.tech/schemas/commodity/3' . (($debugEDDN === true) ? '/test' : '');
+                $temp['$schemaRef']             = 'https://cedar.canonn.tech/schemas/commodity/3' . (($debugEDDN === true) ? '/test' : '');
                 $temp['header']                 = $json['header'];
 
                 $temp['message']                = array();
@@ -170,7 +170,7 @@ while (true)
 
 
             // Handle commodity v3
-            if($json['$schemaRef'] == 'https://ceddn.canonn.tech/schemas/commodity/3' . (($debugEDDN === true) ? '/test' : ''))
+            if($json['$schemaRef'] == 'https://cedar.canonn.tech/schemas/commodity/3' . (($debugEDDN === true) ? '/test' : ''))
             {
                 if($converted === false)
                 {

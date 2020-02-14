@@ -14,43 +14,42 @@ import zmq.green as zmq
 import re
 
 from bottle import get, request, response, run as bottle_run
-from ceddn.conf.Settings import Settings, loadConfig
-from ceddn.core.Analytics import Analytics
+from cedar.conf.Settings import Settings, loadConfig
+from cedar.core.Analytics import Analytics
 
 from gevent import monkey
 monkey.patch_all()
 
 # This import must be done post-monkey-patching!
 if Settings.RELAY_DUPLICATE_MAX_MINUTES:
-    from ceddn.core.DuplicateMessages import DuplicateMessages
+    from cedar.core.DuplicateMessages import DuplicateMessages
     duplicateMessages = DuplicateMessages()
     duplicateMessages.start()
-
 
 def date(__format):
     d = datetime.datetime.utcnow()
     return d.strftime(__format)
 
-
 @get('/ping')
 def ping():
     return 'pong'
 
-
 @get('/getTotalSoftwares/')
 def getTotalSoftwares():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     softwares = collections.OrderedDict()
 
     maxDays = request.GET.get('maxDays', '31').strip()
     maxDays = int(maxDays) - 1
 
     query = """SELECT name, SUM(hits) AS total, MAX(dateStats) AS maxDate
-               FROM softwares
-               GROUP BY name
-               HAVING maxDate >= DATE_SUB(NOW(), INTERVAL %s DAY)
-               ORDER BY total DESC"""
+                FROM softwares
+                GROUP BY name
+                HAVING maxDate >= DATE_SUB(NOW(), INTERVAL %s DAY)
+                ORDER BY total DESC"""
 
     results = db.cursor()
     results.execute(query, (maxDays, ))
@@ -62,46 +61,48 @@ def getTotalSoftwares():
 
     return simplejson.dumps(softwares)
 
-
 @get('/getSoftwares/')
 def getSoftwares():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     softwares = collections.OrderedDict()
 
     dateStart = request.GET.get('dateStart', str(date('%Y-%m-%d'))).strip()
     dateEnd = request.GET.get('dateEnd', str(date('%Y-%m-%d'))).strip()
 
     query = """SELECT *
-               FROM `softwares`
-               WHERE `dateStats` BETWEEN %s AND %s
-               ORDER BY `hits` DESC, `dateStats` ASC"""
+                FROM `softwares`
+                WHERE `dateStats` BETWEEN %s AND %s
+                ORDER BY `hits` DESC, `dateStats` ASC"""
 
     results = db.cursor()
     results.execute(query, (dateStart, dateEnd))
 
     for row in results:
-        currentDate = row[2].strftime('%Y-%m-%d')
+        currentDate = row[3].strftime('%Y-%m-%d')
         if not currentDate in softwares.keys():
             softwares[currentDate] = collections.OrderedDict()
 
-        softwares[currentDate][str(row[0])] = str(row[1])
+        softwares[currentDate][str(row[1])] = str(row[2])
 
     db.close()
 
     return simplejson.dumps(softwares)
 
-
 @get('/getTotalSchemas/')
 def getTotalSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     schemas = collections.OrderedDict()
 
     query = """SELECT `name`, SUM(`hits`) AS `total`
-               FROM `schemas`
-               GROUP BY `name`
-               ORDER BY `total` DESC"""
+                FROM `schemas`
+                GROUP BY `name`
+                ORDER BY `total` DESC"""
 
     results = db.cursor()
     results.execute(query)
@@ -113,11 +114,12 @@ def getTotalSchemas():
 
     return simplejson.dumps(schemas)
 
-
 @get('/getSchemas/')
 def getSchemas():
     response.set_header("Access-Control-Allow-Origin", "*")
-    db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+    response.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.set_header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Allow, Date")
+    db = mariadb.connect(host=Settings.MONITOR_DB['host'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
     #db.text_factory = lambda x: unicode(x, "utf-8", "ignore")
     schemas = collections.OrderedDict()
 
@@ -125,24 +127,23 @@ def getSchemas():
     dateEnd = request.GET.get('dateEnd', str(date('%Y-%m-%d'))).strip()
 
     query = """SELECT *
-               FROM `schemas`
-               WHERE `dateStats` BETWEEN %s AND %s
-               ORDER BY `hits` DESC, `dateStats` ASC"""
+                FROM `schemas`
+                WHERE `dateStats` BETWEEN %s AND %s
+                ORDER BY `hits` DESC, `dateStats` ASC"""
 
     results = db.cursor()
     results.execute(query, (dateStart, dateEnd))
 
     for row in results:
-        currentDate = row[2].strftime('%Y-%m-%d')
+        currentDate = row[3].strftime('%Y-%m-%d')
         if not currentDate in schemas.keys():
             schemas[currentDate] = collections.OrderedDict()
 
-        schemas[currentDate][str(row[0])] = str(row[1])
+        schemas[currentDate][str(row[1])] = str(row[2])
 
     db.close()
 
     return simplejson.dumps(schemas)
-
 
 class Monitor(Thread):
 
@@ -158,7 +159,7 @@ class Monitor(Thread):
             receiver.connect(binding)
 
         def monitor_worker(message):
-            db = mariadb.connect(host=Settings.MONITOR_DB['host'], port=Settings.MONITOR_DB['port'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
+            db = mariadb.connect(host=Settings.MONITOR_DB['host'], user=Settings.MONITOR_DB['user'], password=Settings.MONITOR_DB['password'], database=Settings.MONITOR_DB['database'])
 
             # Separate topic from message
             message = message.split(' |-| ')
@@ -219,7 +220,6 @@ class Monitor(Thread):
             inboundMessage = receiver.recv()
             gevent.spawn(monitor_worker, inboundMessage)
 
-
 def main():
     loadConfig()
     m = Monitor()
@@ -231,7 +231,6 @@ def main():
         certfile=Settings.CERT_FILE,
         keyfile=Settings.KEY_FILE
     )
-
 
 if __name__ == '__main__':
     main()

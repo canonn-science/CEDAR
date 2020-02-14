@@ -2,8 +2,7 @@ from setuptools import setup, find_packages
 import re
 import glob
 
-
-VERSIONFILE = "src/ceddn/conf/Version.py"
+VERSIONFILE = "src/cedar/conf/Version.py"
 verstr      = "unknown"
 try:
     verstrline = open(VERSIONFILE, "rt").read()
@@ -17,22 +16,22 @@ except EnvironmentError:
 
 
 setup(
-    name='ceddn',
+    name='cedar',
     version=verstr,
-    description='Canonn Elite Dangerous Data Network',
+    description='Canonn Elite Dangerous Automated Relay',
     author='Canonn R&D Team',
     author_email='rd@canonn.tech',
-    url='https://github.com/Canonn-Science/CEDDN',
+    url='https://github.com/Canonn-Science/CEDAR',
     packages=find_packages('src', exclude=["*.tests"]),
     package_dir = {'':'src'},
-    data_files=[('ceddn/schemas', glob.glob("schemas/*.json"))],
+    data_files=[('cedar/schemas', glob.glob("schemas/*.json"))],
     long_description="""The Canonn Elite Dangerous Data Network allows E:D players to share data. Not affiliated with Frontier Developments.""",
-    install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python", "python-dotenv", "strict-rfc3339", "pathlib"],
+    install_requires=["argparse", "bottle", "enum34", "gevent", "jsonschema", "pyzmq", "simplejson", "mysql-connector-python", "python-dotenv", "strict-rfc3339", "pathlib", "requests"],
     entry_points={
         'console_scripts': [
-            'ceddn-gateway = ceddn.Gateway:main',
-            'ceddn-relay = ceddn.Relay:main',
-            'ceddn-monitor = ceddn.Monitor:main',
+            'cedar-gateway = cedar.Gateway:main',
+            'cedar-relay = cedar.Relay:main',
+            'cedar-monitor = cedar.Monitor:main',
             ],
         }
     )

@@ -2,7 +2,7 @@ const zlib = require('zlib');
 const zmq = require('zeromq');
 const sock = zmq.socket('sub');
 
-sock.connect('tcp://ceddn.canonn.tech:9500');
+sock.connect('tcp://cedar.canonn.tech:9500');
 console.log('Worker connected to port 9500');
 
 sock.subscribe('');

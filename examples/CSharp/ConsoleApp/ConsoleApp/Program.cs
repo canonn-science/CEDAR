@@ -18,7 +18,7 @@ namespace ConsoleApp
             using (var client = new SubscriberSocket())
             {
                 client.Options.ReceiveHighWatermark = 1000;
-                client.Connect("tcp://ceddn.canonn.tech:9500");
+                client.Connect("tcp://cedar.canonn.tech:9500");
                 client.SubscribeToAnyTopic();
                 while (true)
                 {

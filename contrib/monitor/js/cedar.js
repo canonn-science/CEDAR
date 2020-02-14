@@ -1,17 +1,17 @@
 var updateInterval      = 60000,
 
-    monitorEndPoint     = 'https://ceddn.canonn.tech:9091/',
+    monitorEndPoint     = 'https://cedar.canonn.tech:9091/',
 
     //gatewayBottlePort   = 8080,
     gatewayBottlePort   = 4430,
     relayBottlePort     = 9090,
 
     gateways            = [
-        'ceddn.canonn.tech'
+        'cedar.canonn.tech'
     ], //TODO: Must find a way to bind them to monitor
 
     relays              = [
-        'ceddn.canonn.tech'
+        'cedar.canonn.tech'
     ]; //TODO: Must find a way to bind them to monitor
 
 var stats = {
@@ -30,13 +30,13 @@ var makeSlug = function(str) {
 }
 
 var makeName =  function(str) {
-	var match = /^https:\/\/ceddn.canonn.tech\/schemas\/(\w)(\w*)\/(\d+)$/.exec(str);
+	var match = /^https:\/\/cedar.canonn.tech\/schemas\/(\w)(\w*)\/(\d+)$/.exec(str);
 	if(match)
 	{
 		return match[1].toUpperCase() + match[2] + " v" + match[3];
 	}
 
-	var match = /^https:\/\/ceddn.canonn.tech\/schemas\/(\w)(\w*)\/(\d+)\/test$/.exec(str);
+	var match = /^https:\/\/cedar.canonn.tech\/schemas\/(\w)(\w*)\/(\d+)\/test$/.exec(str);
 	if(match)
 	{
 		return match[1].toUpperCase() + match[2] + " v" + match[3] + " [TEST]";
@@ -297,7 +297,7 @@ var doUpdateSchemas = function()
 					// Convert old schemas and sum them to new schemas
                     schemasTotal = {};
                     $.each(schemasTotalTmp, function(schema, hits){
-                        schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://ceddn.canonn.tech/schemas/');
+                        schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://cedar.canonn.tech/schemas/');
                         hits   = parseInt(hits);
 
                         if(schemasTotal[schema]){ schemasTotal[schema] += hits; }
@@ -319,7 +319,7 @@ var doUpdateSchemas = function()
 						// Convert old schemas and sum them to new schemas
 						schemasYesterdayTmp = {};
 						$.each(schemas[yesterday], function(schema, hits){
-							schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://ceddn.canonn.tech/schemas/');
+							schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://cedar.canonn.tech/schemas/');
 							hits   = parseInt(hits);
 
 							if(schemasYesterdayTmp[schema]){ schemasYesterdayTmp[schema] += hits; }
@@ -329,7 +329,7 @@ var doUpdateSchemas = function()
 
 						schemasTodayTmp = {};
 						$.each(schemas[today], function(schema, hits){
-							schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://ceddn.canonn.tech/schemas/');
+							schema = schema.replace('http://schemas.elite-markets.net/eddn/', 'https://cedar.canonn.tech/schemas/');
 							hits   = parseInt(hits);
 
 							if(schemasTodayTmp[schema]){ schemasYesterdayTmp[schema] += hits; }
