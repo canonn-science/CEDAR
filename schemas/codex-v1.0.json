@@ -36,7 +36,7 @@
 			"type": "object",
 			"description": "Contains all properties from the codex event in the client's journal minus Localised strings and the properties marked below as 'disallowed'",
 			"additionalProperties": true,
-			"required": ["timestamp", "event", "EntryID", "System", "Region", "SystemAddress", "Name", "Category", "SubCategory"],
+			"required": ["timestamp", "event", "entryID", "system", "region", "systemAddress", "name", "category", "subCategory"],
 			"properties": {
 				"timestamp": {
 					"type": "string",
