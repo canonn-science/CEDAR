@@ -84,11 +84,11 @@
 					"description": "Should be in the Journal Event"
 				},
 				"latitude": {
-					"type": "integer",
+					"type": "number",
 					"description": "Not included in the event, should be added by the sender if present in status.json"
 				},
 				"longitude": {
-					"type": "integer",
+					"type": "number",
 					"description": "Not included in the event, should be added by the sender if present in status.json"
 				}
 			},
