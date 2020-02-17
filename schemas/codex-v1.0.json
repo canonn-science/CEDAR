@@ -47,36 +47,41 @@
 				},
 				"entryID": {
 					"type": "integer",
-					"description": "Should be added by the sender if not present in the journal event"
+					"description": "Required EventID for the codex entry"
 				},
 				"system": {
 					"type": "string",
 					"minLength": 1,
-					"description": "Must be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
+				},
+				"body": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Must be added if Codex event is body based"
 				},
 				"region": {
 					"type": "string",
 					"minLength": 1,
-					"description": "Must be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
 				},
 				"systemAddress": {
 					"type": "integer",
-					"description": "Should be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
 				},
 				"name": {
 					"type": "string",
 					"minLength": 1,
-					"description": "Must be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
 				},
 				"category": {
 					"type": "string",
 					"minLength": 1,
-					"description": "Must be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
 				},
 				"subCategory": {
 					"type": "string",
 					"minLength": 1,
-					"description": "Must be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
 				},
 				"latitude": {
 					"type": "integer",

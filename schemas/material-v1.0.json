@@ -51,7 +51,12 @@
 				"system": {
 					"type": "string",
 					"minLength": 1,
-					"description": "Must be added by the sender if not present in the journal event"
+					"description": "Should be in the Journal Event"
+				},
+				"body": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Must be added if event is body based"
 				},
 				"region": {
 					"type": "string",
