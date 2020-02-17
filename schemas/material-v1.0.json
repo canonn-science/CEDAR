@@ -48,17 +48,17 @@
 						"MaterialsReward"
 					]
 				},
-				"System": {
+				"system": {
 					"type": "string",
 					"minLength": 1,
 					"description": "Must be added by the sender if not present in the journal event"
 				},
-				"Region": {
+				"region": {
 					"type": "string",
 					"minLength": 1,
 					"description": "Must be added by the sender if not present in the journal event"
 				},
-				"SystemAddress": {
+				"systemAddress": {
 					"type": "integer",
 					"description": "Should be added by the sender if not present in the journal event"
 				},
@@ -84,11 +84,11 @@
 					"type": "integer",
 					"description": "Must be added by the sender if not present in the journal event"
 				},
-				"Latitude": {
+				"latitude": {
 					"type": "integer",
 					"description": "Not included in the event, should be added by the sender if present in status.json"
 				},
-				"Longitude": {
+				"longitude": {
 					"type": "integer",
 					"description": "Not included in the event, should be added by the sender if present in status.json"
 				}
