@@ -17,6 +17,7 @@ import gevent
 import simplejson
 import hashlib
 import uuid
+import requests
 import zmq.green as zmq
 from bottle import get, response, run as bottle_run
 from cedar.conf.Settings import Settings, loadConfig
@@ -50,6 +51,7 @@ class Relay(Thread):
     UPLOADER_PRIVACY_RANDOM = "random"  # use scramble_uploader() - default
     UPLOADER_PRIVACY_CLEAR = "clear"  # allow the name through untouched
     UPLOADER_PRIVACY_MODES = [UPLOADER_PRIVACY_RANDOM, UPLOADER_PRIVACY_CLEAR]
+    CAPI_REFETCH_REPORT_TYPES = 4 * 60 * 60 # 4 hrs
 
     def __init__(self, **kwargs):
         super(Relay, self).__init__(**kwargs)
@@ -113,6 +115,7 @@ class Relay(Thread):
 
             message = zlib.decompress(message)
             json    = simplejson.loads(message)
+            jsonCAPI = simplejson.loads(message)
 
             # Handle duplicate message
             if Settings.RELAY_DUPLICATE_MAX_MINUTES:
@@ -141,7 +144,6 @@ class Relay(Thread):
 
             # Convert message back to JSON
             message = simplejson.dumps(json, sort_keys=True)
-            print(message)
 
             # Recompress message
             message = zlib.compress(message)
@@ -150,6 +152,10 @@ class Relay(Thread):
             ## TODO - Add direct POST request to CAPIv2 for message
             sender.send(message)
             statsCollector.tally("outbound")
+
+            # Fire message to CAPIv2
+            messageCAPI = simplejson.dumps(jsonCAPI, sort_keys=True)
+            print(messageCAPI)
 
         while True:
             # For each incoming message, spawn a greenlet using the relay_worker
