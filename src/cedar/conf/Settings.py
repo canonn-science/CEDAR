@@ -28,7 +28,7 @@ class _Settings(object):
     RELAY_HTTP_BIND_ADDRESS                 = "0.0.0.0"
     RELAY_HTTP_PORT                         = 9090
 
-    RELAY_RECEIVER_BINDINGS                 = ["tcp://0.0.0.0:8500"]
+    RELAY_RECEIVER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     RELAY_SENDER_BINDINGS                   = ["tcp://*:9500"]
 
@@ -47,7 +47,7 @@ class _Settings(object):
     GATEWAY_HTTP_BIND_ADDRESS               = "127.0.0.1"
     GATEWAY_HTTP_PORT                       = 8081
 
-    GATEWAY_SENDER_BINDINGS                 = simplejson.loads(os.getenv("RELAY_ADDRESSES"))
+    GATEWAY_SENDER_BINDINGS                 = ["tcp://127.0.0.1:8500"]
 
     GATEWAY_JSON_SCHEMAS                    = {
         "https://cedar.canonn.tech/schemas/codex/1"         : "schemas/codex-v1.0.json",
